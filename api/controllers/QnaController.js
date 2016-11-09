@@ -7,62 +7,59 @@
 
 module.exports = {
 
-	getSubjectDetails: function(req,res){
+	getQuestionAnswer: function(req,res){
 		
 		var async = require("async");
 		var answers;
 		var questions;
 		var subjects;
 
-		var data = {};
-		
-		Subject.find({
-			subproduct: req.param('subproductid')
+		Subject.findOne({
+			id: req.param('id')
 		})
-		.exec(function(err,subjectList){
+		.exec(function (err,subjectData){
+			
 			if(err){
-				res.json(err)
+				return res.json(err)
 			}
 
+			
 
-			async.eachSeries(subjectList,function(subject,callback){
+			Question.find({
+				subject: subjectData.id
+			})
+			.exec(function(err,questionList){
 
-				console.log(subject);
+				var data = [];
 
-				Question.find({
-					subject: subject.id
-				})
-				.exec(function(err,questionList){
-					if(err){
-						console.log('this is pushed')
-						res.json(err)
-					}
+				if(err){
+					return res.json(err)
+				}
+				async.each(questionList, function(question,callback){
+					//console.log(question)
 
-					async.each(questionList,function(question,callback){
-						Answer.find({
-							question: question.id
-						})
-						.exec(function(err,answer){
-							if(err){
-								res.json(err)
-							}
-
-							question.answer = answer;
-
-						})
-
-						subject.question = question;
+					Answer.find({
+						question: question.id
+					})
+					.exec(function(err,answer){
+						if(err){
+							return res.json(err)
+						}
+						question['answer'] = answer
+						//console.log(question);
+						data.push(question)
 
 						callback();
+
 					})
-				})
-
-				data.subject.push(subject);
-
-				callback();
+				}, function(err){
+					console.log(data)
+					res.json({
+						subject: subjectData,
+						question: data
+					})
+				})				
 			})
-
-			res.json(data)
 		})
 	}
 };

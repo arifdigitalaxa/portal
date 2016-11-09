@@ -18,7 +18,7 @@ module.exports = {
 			Answer.create({
 				name: req.param('name'),
 				desc: req.param('desc'),
-				subject: req.param('questionid')
+				question: req.param('questionid')
 			}).exec( function(err,answer){
 				if(err){
 					res.json(err)

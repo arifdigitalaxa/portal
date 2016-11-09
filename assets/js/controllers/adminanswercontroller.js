@@ -57,10 +57,11 @@ $scope.productList;
       modal.element.modal();
       modal.close.then(function(result) {
         if(result){
+          console.log(result)
           $http.post('/answer/create',{
             name: result.name,
             desc: result.desc,
-            subjectid: result.subject
+            questionid: result.question
           })
           .then(function success(response){
               // console.log(response);
@@ -83,6 +84,8 @@ $scope.productList;
     .then(function successRetrieve(response){
       $scope.question = response.data.question;
       $scope.answerList = response.data.answer;
+
+      console.log($scope.answerList)
     }, function successRetrieve(err){
       console.log(err);
     })
