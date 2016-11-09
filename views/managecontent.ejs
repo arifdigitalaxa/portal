@@ -1,0 +1,29 @@
+<div id='main' ng-controller="AdminProductController" ng-init ="getAllProduct()">
+    <div class="container"> 
+	    <div class="row col-md-8 col-md-offset-2 custyle">
+	    	<h3 class="text-middle">User List</h3> 
+	        <table class="table table-striped custab">
+	        	<thead>
+	        	<a href="#" class="btn btn-primary btn-xs pull-right" ng-click="addProduct()"><b>+</b> Add new product</a>
+	        		<tr>
+	        			<th>ID</th>
+	        			<th>Product</th>
+	        			<th>Description</th>
+	        			<!-- <th>Edit</th> -->
+	        			<th>Delete</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr ng-repeat="product in productList track by product.id">
+	        			<th>{{product.id}}</th>
+	        			<th>{{product.name}}</th>
+	        			<th>{{product.desc}}</th>
+	        			<!-- <th><i class="fa fa-pencil-square-o text-primary" aria-hidden="true" ng-click=""></i></th> -->
+	        			<th><i class="fa fa-trash text-danger" aria-hidden="true" ng-click="deleteProduct(ev,product)"></i></th>
+	        		</tr>
+	        	</tbody>
+	        </table>
+	    </div>
+    </div>  
+</div>
+

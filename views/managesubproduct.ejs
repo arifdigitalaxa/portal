@@ -1,0 +1,34 @@
+<div id='main' ng-controller="AdminSubProductController" ng-init ="getAllSubProduct()">
+    <div class="container"> 
+    	<div class="row col-md-8 col-md-offset-2 custyle">
+    		<h3>Product List</h3>
+    		<select class="form-control" id="product" ng-model="productList" ng-options="product.id as product.name for product in productList">
+	    			<option>{{product}}</option>
+	  		</select>
+    	</div>
+	    <div class="row col-md-8 col-md-offset-2 custyle">
+	    	<h3 class="text-middle">Sub Product List</h3> 
+	        <table class="table table-striped custab">
+	        	<thead>
+	        	<a href="#" class="btn btn-primary btn-xs pull-right" ng-click="addSubProduct()"><b>+</b> Add new sub product</a>
+	        		<tr>
+	        			<th>ID</th>
+	        			<th>Sub Product</th>
+	        			<th>Description</th>
+	        			<!-- <th>Edit</th> -->
+	        			<th>Delete</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr ng-repeat="subproduct in subproductList track by subproduct.id">
+	        			<th>{{subproduct.id}}</th>
+	        			<th>{{subproduct.name}}</th>
+	        			<th>{{subproduct.desc}}</th>
+	        			<!-- <th><i class="fa fa-pencil-square-o text-primary" aria-hidden="true" ng-click=""></i></th> -->
+	        			<th><i class="fa fa-trash text-danger" aria-hidden="true" ng-click="deleteSubProduct(ev,subproduct)"></i></th>
+	        		</tr>
+	        	</tbody>
+	        </table>
+	    </div>
+    </div>  
+</div>

@@ -1,0 +1,1 @@
+var app = angular.module("myApp", ['ngMaterial','ngCookies','angularModalService', 'ngAnimate', 'ui.router'])

@@ -1,0 +1,26 @@
+<div id='main' ng-controller="AdminQuestionController" ng-init ="getAllQuestion()">
+    <div class="container"> 
+	    <div class="row col-md-8 col-md-offset-2 custyle">
+	    	<h3 class="text-center">Question List</h3> 
+	        <table class="table table-striped custab">
+	        	<thead>
+	        	<a href="#" class="btn btn-primary btn-xs pull-right" ng-click="addQuestion()"><b>+</b> Add new question</a>
+	        		<tr>
+	        			<th>Question</th>
+	        			<th>Description</th>
+	        			<th>Edit</th>
+	        			<th>Delete</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr ng-repeat="question in questionList track by question.id">
+						<th>{{question.name}}</th>
+	        			<th>{{question.desc}}</th>
+	        			<th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th>
+	        			<th><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteQuestion(ev,question)"></i></th>
+	        		</tr>
+	        	</tbody>
+	        </table>
+	    </div>
+    </div>  
+</div>

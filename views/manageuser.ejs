@@ -1,0 +1,31 @@
+<div id='main' ng-controller="AdminUserController" ng-init ="getAllUser()">
+    <div class="container"> 
+	    <div class="row col-md-10 col-md-offset-1 custyle">
+	    	<h3 class="text-center"><strong>User List</strong></h3> 
+	        <table class="table table-striped custab">
+	        	<thead>
+	        	<a href="#" class="btn btn-primary btn-xs pull-right" ng-click="addUser()"><b>+</b> Add new user</a>
+	        		<tr>
+	        			<th>Username</th>
+	        			<th>Email</th>
+	        			<th class="text-center">Admin</th>
+	        			<th class="text-center">Edit</th>
+	        			<th class="text-center">Delete</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr ng-repeat="user in userList track by user.id">
+	        			<th>{{user.username}}</th>
+	        			<th>{{user.email}}</th>
+	        			<!-- <th class="text-center">{{user.userType == 1? "YES":"NO"}}</th> -->
+	        			<th class="text-center" ng-if="user.userType == 1"><i class="fa fa-check text-success fa-lg" aria-hidden="true" ng-click=""></i></th>
+	        			<th class="text-center" ng-if="user.userType == 0"><i class="fa fa-times text-danger fa-lg" aria-hidden="true" ng-click=""></i></th>
+	        			<th class="text-center"><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th>
+	        			<th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteUser(ev,user)"></i></th>
+	        		</tr>
+	        	</tbody>
+	        </table>
+	    </div>
+    </div>  
+</div>
+

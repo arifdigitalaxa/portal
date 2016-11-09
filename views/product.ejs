@@ -1,0 +1,13 @@
+<div id='main' ng-controller="ProductController" ng-init ="getproduct()">
+    <div class="container">  
+        <div class="row col-md-8 col-md-offset-2 custyle">
+            <p><h2  class="text-center"><strong>Product List</strong></h2></p>  
+            <div class="list-group">  
+            <a ng-href="/subproductlist" class="list-group-item" ng-repeat="product in productList track by product.id" ng-click="selectProduct(product)">                  
+                <h4 class="list-group-item-heading"><strong>{{product.name}}</strong></h4>  
+                <p class="list-group-item-text">{{product.desc}}</p>  
+            </a> 
+        </div>  
+        </div> 
+    </div>  
+</div>

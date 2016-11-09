@@ -1,0 +1,43 @@
+<div class="modal fade">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      <div class="modal-body">
+		<form class="form-horizontal" role="form">
+		  <div class="form-group">
+		    <label for="name" class="col-sm-2 control-label">Name</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="name" placeholder="Your Name" ng-model="user.username">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="email" class="col-sm-2 control-label">Email</label>
+		    <div class="col-sm-10">
+		      <input type="email" class="form-control" id="email" placeholder="Email" ng-model="user.email">
+		    </div>
+		  </div>
+      <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="user.password">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="conpassword" class="col-sm-2 control-label">Confirm Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="user.passwordMatch">
+        </div>
+      </div>
+		</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal" ng-disabled="!user.password || !user.passwordMatch || user.password !== user.passwordMatch || !user.username">OK</button>
+        <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

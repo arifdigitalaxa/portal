@@ -1,0 +1,26 @@
+<div id='main' ng-controller="AdminSubjectController" ng-init ="getAllSubject()">
+    <div class="container"> 
+	    <div class="row col-md-8 col-md-offset-2 custyle">
+	    	<h3 class="text-center">Subject List</h3> 
+	        <table class="table table-striped custab">
+	        	<thead>
+	        	<a href="#" class="btn btn-primary btn-xs pull-right" ng-click="addSubject()"><b>+</b> Add new subject</a>
+	        		<tr>
+	        			<th>Subject</th>
+	        			<th>Description</th>
+	        			<th>Edit</th>
+	        			<th>Delete</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr ng-repeat="subject in subjectList track by subject.id">
+						<th>{{subject.name}}</th>
+	        			<th>{{subject.desc}}</th>
+	        			<th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th>
+	        			<th><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteSubject(ev,subject)"></i></th>
+	        		</tr>
+	        	</tbody>
+	        </table>
+	    </div>
+    </div>  
+</div>
