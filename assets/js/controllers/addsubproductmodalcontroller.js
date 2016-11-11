@@ -1,9 +1,11 @@
 app.controller('subproductModalController', [
-  '$scope', '$element', 'title', 'product', 'close', 
-  function($scope, $element, title, product, close) {
+  '$scope', '$element', 'title', 'product', 'productid', 'close', 
+  function($scope, $element, title, product, productid, close) {
 
   $scope.title = title;
   $scope.productList = product
+  $scope.subproduct = {}
+  $scope.subproduct['product'] = productid
   //  This close function doesn't need to use jQuery or bootstrap, because
   //  the button has the 'data-dismiss' attribute.
   $scope.close = function() {

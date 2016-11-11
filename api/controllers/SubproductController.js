@@ -86,6 +86,20 @@ module.exports = {
 		// })
 	},
 
+	getCertainProduct: function(req,res){
+		Subproduct.find({
+			product: req.param('id')
+		}).exec(function(err,subproduct){
+			if(err){
+				res.json(err)
+			}
+
+			res.json({
+				subproduct: subproduct
+			})
+		})
+	},
+
 	delete: function(req,res){
 
 		

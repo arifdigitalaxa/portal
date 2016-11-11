@@ -1,9 +1,11 @@
 app.controller('questionModalController', [
-  '$scope', '$element', 'title', 'subject', 'close', 
-  function($scope, $element, title, subject, close) {
+  '$scope', '$element', 'title', 'subject', 'subjectid','close', 
+  function($scope, $element, title, subject, subjectid, close) {
 
   $scope.title = title;
   $scope.subjectList = subject
+  $scope.question = {}
+  $scope.question['subject'] = subjectid
   //  This close function doesn't need to use jQuery or bootstrap, because
   //  the button has the 'data-dismiss' attribute.
   $scope.close = function() {

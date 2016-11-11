@@ -1,6 +1,6 @@
 <div id='main' ng-controller="AdminQuestionController" ng-init ="getAllQuestion()">
-    <div class="container"> 
-	    <div class="row col-md-8 col-md-offset-2 custyle">
+    <div class="container" ng-cloak> 
+	    <div class="row col-md-10 col-md-offset-1 custyle">
 	    	<h3 class="text-center">Question List</h3> 
 	        <table class="table table-striped custab">
 	        	<thead>
@@ -8,16 +8,18 @@
 	        		<tr>
 	        			<th>Question</th>
 	        			<th>Description</th>
-	        			<th>Edit</th>
-	        			<th>Delete</th>
+	        			<!-- <th>Edit</th> -->
+	        			<th class="text-center">Delete</th>
+	        			<th class="text-center">Add Answer</th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
 	        		<tr ng-repeat="question in questionList track by question.id">
 						<th>{{question.name}}</th>
 	        			<th>{{question.desc}}</th>
-	        			<th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th>
-	        			<th><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteQuestion(ev,question)"></i></th>
+	        			<!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+	        			<th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteQuestion(ev,question)"></i>
+	        			<th class="text-center"><strong><i class="fa fa-plus-square text-success fa-lg" aria-hidden="true" ng-click="addAnswer(ev,question)"></i></strong></th></th>
 	        		</tr>
 	        	</tbody>
 	        </table>

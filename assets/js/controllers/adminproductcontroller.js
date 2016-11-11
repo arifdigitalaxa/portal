@@ -115,13 +115,15 @@ $scope.productList;
     });
   }
 
-  $scope.addSubProduct = function(ev){
+  $scope.addSubProduct = function(ev,product){
+      console.log()
       ModalService.showModal({
         templateUrl: "./modals/addSubProduct.html",
         controller: "subproductModalController",
         inputs: {
           title: "Register New Sub Product",
-          product: $scope.productList
+          product: $scope.productList,
+          productid: product.id
         }
       }).then(function(modal) {
         modal.element.modal();

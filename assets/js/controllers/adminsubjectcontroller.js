@@ -51,7 +51,8 @@ $scope.productList;
       controller: "subjectModalController",
       inputs: {
         title: "Register New Subject",
-        subproduct: $scope.subproduct
+        subproduct: $scope.subproduct,
+        subjectid: ''
       }
     }).then(function(modal) {
       modal.element.modal();
@@ -70,6 +71,39 @@ $scope.productList;
               }
               alertStatus(ev,response.data.title,response.data.message);
               $scope.getAllSubject(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
+
+  $scope.addQuestion = function(ev,subject){
+    ModalService.showModal({
+      templateUrl: "./modals/addQuestion.html",
+      controller: "questionModalController",
+      inputs: {
+        title: "Register New Question",
+        subject: $scope.subjectList,
+        subjectid: subject.id
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/question/create',{
+            name: result.name,
+            desc: result.desc,
+            subjectid: result.subject
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
           }, function error(err){
               alertStatus(ev,"Error",err)
           })

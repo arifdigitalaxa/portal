@@ -3,6 +3,8 @@ app.controller('AdminSubProductController',['$scope','$http','$mdDialog','ModalS
 
 $scope.productList;
 
+$scope.productId;
+
  function alertStatus(ev,title,message){
     $mdDialog.show(
           $mdDialog.alert()
@@ -52,13 +54,25 @@ $scope.productList;
     });
   };
 
+  $scope.filterSubProduct = function(productid){
+    $http.post('/subproduct/getCertainProduct',{
+        id: productid
+    })
+    .then(function successRetrieve(response){
+      $scope.subproductList = response.data.subproduct;
+    }, function successRetrieve(err){
+      console.log(err);
+    })
+  }
+
   $scope.addSubProduct = function(ev){
     ModalService.showModal({
       templateUrl: "./modals/addSubProduct.html",
       controller: "subproductModalController",
       inputs: {
         title: "Register New Sub Product",
-        product: $scope.productList
+        product: $scope.productList,
+        productid: ''
       }
     }).then(function(modal) {
       modal.element.modal();
@@ -77,6 +91,39 @@ $scope.productList;
               }
               alertStatus(ev,response.data.title,response.data.message);
               $scope.getAllSubProduct(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
+
+  $scope.addSubject = function(ev,subproduct){
+    ModalService.showModal({
+      templateUrl: "./modals/addSubject.html",
+      controller: "subjectModalController",
+      inputs: {
+        title: "Register New Subject",
+        subproduct: $scope.subproductList,
+        subjectid: subproduct.id
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/subject/create',{
+            name: result.name,
+            desc: result.desc,
+            subproductid: result.subproduct
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
           }, function error(err){
               alertStatus(ev,"Error",err)
           })

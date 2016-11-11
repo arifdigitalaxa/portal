@@ -1,5 +1,5 @@
 <div id='main' ng-controller="AdminProductController" ng-init ="getAllProduct()">
-    <div class="row col-md-10 col-md-offset-1 custyle">
+    <div class="row col-md-10 col-md-offset-1 custyle" ng-cloak>
 	    	<h3 class="text-center"><strong>Product List</strong></h3> 
 	        <table class="table table-striped custab text-center">
 	        	<thead>
@@ -7,7 +7,7 @@
 	        		<tr>
 	        			<th>Product</th>
 	        			<th>Description</th>
-	        			<th class="text-center">Edit</th>
+	        			<!-- <th class="text-center">Edit</th> -->
 	        			<th class="text-center">Delete</th>
 	        			<th class="text-center">Add Sub Products</th>
 	        		</tr>
@@ -16,7 +16,7 @@
 	        		<tr ng-repeat="product in productList track by product.id">
 	        			<th>{{product.name}}</th>
 	        			<th>{{product.desc}}</th>
-	        			<th class="text-center"><strong><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click="editProduct(ev)"></i></strong></th>
+	        			<!-- <th class="text-center"><strong><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click="editProduct(ev)"></i></strong></th> -->
 	        			<th class="text-center"><strong><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteProduct(ev,product)"></i></strong></th>
 	        			<th class="text-center"><strong><i class="fa fa-plus-square text-success fa-lg" aria-hidden="true" ng-click="addSubProduct(ev,product)"></i></strong></th>
 	        		</tr>

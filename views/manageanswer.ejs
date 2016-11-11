@@ -1,6 +1,6 @@
 <div id='main' ng-controller="AdminAnswerController" ng-init ="getAllAnswer()">
-    <div class="container"> 
-	    <div class="row col-md-8 col-md-offset-2 custyle">
+    <div class="container" ng-cloak> 
+	    <div class="row col-md-10 col-md-offset-1 custyle">
 	    	<h3 class="text-center">Answer List</h3> 
 	        <table class="table table-striped custab">
 	        	<thead>
@@ -8,16 +8,16 @@
 	        		<tr>
 	        			<th>Answer</th>
 	        			<th>Description</th>
-	        			<th>Edit</th>
-	        			<th>Delete</th>
+	        			<!-- <th>Edit</th> -->
+	        			<th class="text-center">Delete</th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
 	        		<tr ng-repeat="answer in answerList track by answer.id">
 						<th>{{answer.name}}</th>
 	        			<th>{{answer.desc}}</th>
-	        			<th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th>
-	        			<th><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteAnswer(ev,answer)"></i></th>
+	        			<!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+	        			<th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteAnswer(ev,answer)"></i></th>
 	        		</tr>
 	        	</tbody>
 	        </table>

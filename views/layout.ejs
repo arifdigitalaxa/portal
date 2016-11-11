@@ -31,6 +31,7 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/cloak.css">
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/node_modules/angular-material/angular-material.min.css">
@@ -38,21 +39,23 @@
   </head>
 
   <body ng-app="myApp">
-  <div id=main ng-controller="MainController" ng-init="userInit()">
-    <nav class="navbar navbar-default" ng-show="user">
+  <div id=main ng-controller="MainController" ng-cloak ng-init="userInit()">
+    <div ng-show="user">
+      <nav class="navbar navbar-default" ng-show="user">
       <div class="container-fluid">
        <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>{{user.username}}</strong><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href ="/" ng-click="">Home</a>
-            <li ng-show="user.userType == 1"><a href="/admin">Admin</a>
-            <li><a href="/logout" ng-click="">Logout</a>
+            <ul class="dropdown-menu">
+              <li><a href ="/" ng-click="">Home</a>
+              <li ng-show="user.userType == 1"><a href="/admin">Admin</a>
+              <li><a href="/logout" ng-click="">Logout</a>
+            </ul>
+          </li>
           </ul>
-        </li>
-        </ul>
-      </div>
-    </nav>
+        </div>
+     </nav>
+    </div>
   </div>
     <%- body %>
 
@@ -137,6 +140,7 @@
     <script src="/js/controllers/logincontroller.js"></script>
     <script src="/js/controllers/maincontroller.js"></script>
     <script src="/js/controllers/productcontroller.js"></script>
+    <script src="/js/controllers/qnacontroller.js"></script>
     <script src="/js/controllers/registercontroller.js"></script>
     <script src="/js/controllers/subjectcontroller.js"></script>
     <script src="/js/controllers/subproductcontroller.js"></script>

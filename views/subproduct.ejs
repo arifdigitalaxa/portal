@@ -1,9 +1,9 @@
 <div id='main' ng-controller="SubproductController" ng-init ="getsubproduct()">
-    <div class="container">  
+    <div class="container" ng-cloak>  
         <div class="row col-md-8 col-md-offset-2 custyle">
             <p><h2  class="text-center"><strong>{{product.name}}</strong></h2></p>  
             <div class="list-group">  
-            <a href="#" class="list-group-item" ng-repeat="subproduct in subproductList track by subproduct.id" ng-click="selectProduct(product)">                  
+            <a href="/qna" class="list-group-item" ng-repeat="subproduct in subproductList track by subproduct.id" ng-click="selectSubProduct(subproduct)">                  
                 <h4 class="list-group-item-heading"><strong>{{subproduct.name}}</strong></h4>  
                 <p class="list-group-item-text">{{subproduct.desc}}</p>  
             </a> 

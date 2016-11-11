@@ -51,7 +51,8 @@ $scope.productList;
       controller: "answerModalController",
       inputs: {
         title: "Register New Answer",
-        question: $scope.question
+        question: $scope.question,
+        questionid: ''
       }
     }).then(function(modal) {
       modal.element.modal();

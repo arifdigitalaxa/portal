@@ -23,9 +23,14 @@ app.controller('SubproductController',['$scope','$http','dataTrans','$window',fu
   	})
   }
 
-  $scope.selectProduct = function(product){
+  $scope.selectSubProduct = function(subproduct){
 
-    dataTrans.addData(product);
+    $window.sessionStorage.subproductID = subproduct.id;
+
+    // $scope.data = dataTrans.getData();
+    // console.log($scope.data)
+    //window.location = "/subproductlist"
+    //$location.path("/admin")
   }
 
 }]);
