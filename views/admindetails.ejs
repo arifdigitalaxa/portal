@@ -1,0 +1,123 @@
+<div id='main' ng-controller="AdminDetailController" ng-init ="getAllData()">
+  <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Subproduct Details
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <strong>&nbsp;Product Name: </strong>{{product.name}}
+          </div>
+          <div class="row">
+            <br/>
+            <strong>&nbsp;Name: </strong>{{subproduct.name}}
+          </div>
+          <div class="row">
+            <strong>&nbsp;Description: </strong>
+            <br/>
+            {{subproduct.name}}
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row text-center">
+            <div class="btn-group-vertical btn-block" role="group" aria-label="...">
+              <a class="btn btn-default btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Subproduct</a>
+              <a class="btn btn-default btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Subject</a>
+              <a class="btn btn-default btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Question</a>
+              <a class="btn btn-default btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Answer</a>
+              <a class="btn btn-default btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete Subproduct</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-8 col-sm-10">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#subject" aria-controls="subject" role="tab" data-toggle="tab">Subjects</a></li>
+      <li role="presentation"><a href="#question" aria-controls="question" role="tab" data-toggle="tab">Questions</a></li>
+      <li role="presentation"><a href="#answer" aria-controls="settings" role="tab" data-toggle="tab">Answer</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="subject">
+        <div class="container" ng-cloak> 
+          <div class="row col-md-10 custyle">
+            <h3 class="text-center">Subject List</h3> 
+              <table class="table table-striped custab">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <!-- <th>Edit</th>--> 
+                    <th class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="subject in subjectList track by subject.id">
+                    <th>{{subject.name}}</th>
+                    <th>{{subject.desc}}</th>
+                    <!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+                    <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteSubject(ev,subject)"></i></th>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>  
+      </div>
+      <div role="tabpanel" class="tab-pane" id="question">
+        <div class="container" ng-cloak> 
+          <div class="row col-md-10 custyle">
+            <h3 class="text-center">Question List</h3> 
+              <table class="table table-striped custab">
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>Description</th>
+                    <!-- <th>Edit</th> -->
+                    <th class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="question in questionList track by question.id">
+                <th>{{question.name}}</th>
+                    <th>{{question.desc}}</th>
+                    <!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+                    <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteQuestion(ev,question)"></i>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>  
+      </div>
+      <div role="tabpanel" class="tab-pane" id="answer">
+        <div class="container" ng-cloak> 
+          <div class="row col-md-10 custyle">
+            <h3 class="text-center">Answer List</h3> 
+              <table class="table table-striped custab">
+                <thead>
+                  <tr>
+                    <th>Answer</th>
+                    <th>Description</th>
+                    <!-- <th>Edit</th> -->
+                    <th class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="answer in answerList track by answer.id">
+                <th>{{answer.name}}</th>
+                    <th>{{answer.desc}}</th>
+                    <!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+                    <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteAnswer(ev,answer)"></i></th>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>

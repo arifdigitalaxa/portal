@@ -41,6 +41,9 @@ module.exports.routes = {
   '/admin': {
     view: 'adminview'
   },
+  '/admindetails':{
+    view: 'admindetails'
+  },
   '/user': {
     view: 'manageuser'
   },
