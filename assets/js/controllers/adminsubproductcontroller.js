@@ -1,4 +1,4 @@
-app.controller('AdminSubProductController',['$scope','$http','$mdDialog','ModalService',function($scope,$http,$mdDialog,ModalService) {
+app.controller('AdminSubProductController',['$scope','$http','$mdDialog','ModalService','$window',function($scope,$http,$mdDialog,ModalService,$window) {
   
 
 $scope.productList;
@@ -130,6 +130,10 @@ $scope.productId;
         }
       });
     });
+  }
+
+  $scope.editSub = function(subproduct){
+    $window.sessionStorage.subproductID = subproduct.id;
   }
 
   $scope.getAllSubProduct = function(ev){

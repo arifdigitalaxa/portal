@@ -14,18 +14,16 @@
 	        		<tr>
 	        			<th>Sub Product</th>
 	        			<th>Description</th>
-	        			<!-- <th>Edit</th> -->
+	        			<th>Edit</th>
 	        			<th class="text-center">Delete</th>
-	        			<th class="text-center">Add Subject</th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
 	        		<tr ng-repeat="subproduct in subproductList track by subproduct.id">
 	        			<th>{{subproduct.name}}</th>
 	        			<th>{{subproduct.desc}}</th>
-	        			<!-- <th><i class="fa fa-pencil-square-o text-primary" aria-hidden="true" ng-click=""></i></th> -->
+	        			<th><a href="/admindetails"><i class="fa fa-pencil-square-o text-primary" aria-hidden="true" ng-click="editSub(subproduct)"></i></a></th>
 	        			<th class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true" ng-click="deleteSubProduct(ev,subproduct)"></i></th>
-	        			<th class="text-center"><strong><i class="fa fa-plus-square text-success fa-lg" aria-hidden="true" ng-click="addSubject(ev,subproduct)"></i></strong></th>
 	        		</tr>
 	        	</tbody>
 	        </table>

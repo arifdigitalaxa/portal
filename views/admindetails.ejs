@@ -1,4 +1,4 @@
-<div id='main' ng-controller="AdminDetailController" ng-init ="getAllData()">
+<div id='main' ng-controller="AdminDetailController" ng-init ="getAllData()" ng-cloak>
   <div class="col-md-3">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -15,7 +15,7 @@
           <div class="row">
             <strong>&nbsp;Description: </strong>
             <br/>
-            {{subproduct.name}}
+            &nbsp;{{subproduct.desc}}
           </div>
         </div>
       </div>
@@ -23,8 +23,8 @@
         <div class="panel-body">
           <div class="row text-center">
             <div class="btn-group-vertical btn-block" role="group" aria-label="...">
-              <a class="btn btn-default btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Subproduct</a>
-              <a class="btn btn-default btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Subject</a>
+              <a class="btn btn-default btn-success"><i class="fa fa-pencil" aria-hidden="true" ></i> Edit Subproduct</a>
+              <a class="btn btn-default btn-primary" ng-click="addSubject()"><i class="fa fa-plus" aria-hidden="true"></i> Add Subject</a>
               <a class="btn btn-default btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Question</a>
               <a class="btn btn-default btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Answer</a>
               <a class="btn btn-default btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete Subproduct</a>

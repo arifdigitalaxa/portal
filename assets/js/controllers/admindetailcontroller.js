@@ -1,4 +1,4 @@
-app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService',function($scope,$http,$mdDialog,ModalService) {
+app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService', '$window', function($scope,$http,$mdDialog,ModalService,$window) {
   
 
 $scope.productList;
@@ -81,17 +81,85 @@ $scope.productList;
   }
 
   $scope.getAllData = function(ev){
-    $http.post('/admin/getAllDataDetail',{})
+    console.log($window.sessionStorage.subproductID)
+    $http.post('/admin/getAllDataDetail',{
+      id: $window.sessionStorage.subproductID
+    })
     .then(function successRetrieve(response){
 
-      $scope.subjectList = response.data.question;
+      $scope.product = response.data.product;
+      $scope.subproduct = response.data.subproduct;
+      $scope.subjectList = response.data.subject;
       $scope.questionList = response.data.question;
       $scope.answerList = response.data.answer;
 
-      console.log($scope.answerList)
+      console.log(response)
     }, function successRetrieve(err){
       console.log(err);
     })
+
+    $scope.deleteSubject = function(ev,subject) {
+    // Appending dialog to document.body to cover sidenav in docs app
+
+    var confirm = $mdDialog.confirm()
+          .title('Delete sub product')
+          .textContent('Confirm to delete product '+subject.name+'?')
+          .ariaLabel('Delete sub product')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      $http({
+        method: 'DELETE',
+        url: '/subject/'+subject.id,
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+       }).then(function success(response){
+          console.log(response)
+          alertStatus(ev,"Success",subject.name + " deleted!");
+          $scope.getAllSubject();
+      }, function failed(err){
+          alertStatus(ev,"Error",subject.name + " not deleted!");
+      })
+
+    }, function() {
+      
+    });
+  };
+
+  $scope.addSubject = function(ev){
+    ModalService.showModal({
+      templateUrl: "./modals/addSubject.html",
+      controller: "subjectModalController",
+      inputs: {
+        title: "Register New Subject",
+        subproduct: $scope.subproduct,
+        subjectid: ''
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/subject/create',{
+            name: result.name,
+            desc: result.desc,
+            subproductid: result.subproduct
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
+              $scope.getAllSubject(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
 
   }
 
