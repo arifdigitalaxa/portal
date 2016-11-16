@@ -1,5 +1,10 @@
 <div id='main' ng-controller="qnaController" ng-init ="getData()">
-    <div class="container" ng-cloak>  
+    <div class="container" ng-cloak>
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="/subproductlist">Subproduct</a></li>
+          <li class="active">{{subproduct.name}}</li>
+        </ol>  
         <div class="row col-md-8 col-md-offset-2 custyle">
             <p><h2  class="text-center"><strong>{{subproduct.name}}</strong></h2></p>
         </div>  

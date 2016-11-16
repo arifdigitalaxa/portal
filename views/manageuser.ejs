@@ -1,5 +1,10 @@
 <div id='main' ng-controller="AdminUserController" ng-init ="getAllUser()">
-    <div class="container" ng-cloak> 
+    <div class="container" ng-cloak>
+    	<ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+        	<li class="active">User Management</li>
+        </ol> 
 	    <div class="row col-md-10 col-md-offset-1 custyle">
 	    	<h3 class="text-center"><strong>User List</strong></h3> 
 	        <table class="table table-striped custab">

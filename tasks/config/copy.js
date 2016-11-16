@@ -39,7 +39,9 @@ module.exports = function(grunt) {
               './node_modules/angular-material/angular-material.min.js',
               './node_modules/angular-cookies/angular-cookies.min.js',
               './node_modules/angular-modal-service/dst/angular-modal-service.min.js',
-              './node_modules/angular-ui-bootstap/dist/ui-bootstrap.js'
+              './node_modules/angular-ui-bootstap/dist/ui-bootstrap.js',
+              './node_modules/angular-sanitize/angular-sanitize.min.js',
+              './node_modules/showdown/dist/showdown.min.js'
               ],
         dest: '.tmp/public/js/dependencies'
       }]

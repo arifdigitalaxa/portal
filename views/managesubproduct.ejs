@@ -1,5 +1,10 @@
 <div id='main' ng-controller="AdminSubProductController" ng-init ="getAllSubProduct()">
     <div class="container" ng-cloak> 
+    	<ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+        	<li class="active">Subproduct Management</li>
+        </ol> 
     	<div class="row col-md-8 col-md-offset-2 custyle">
     		<h3>Product List</h3>
     		<select class="form-control" id="product" ng-model="productId" ng-options="product.id as product.name for product in productList" ng-change="filterSubProduct(productId)">
@@ -7,23 +12,25 @@
 	  		</select>
     	</div>
 	    <div class="row col-md-10 col-md-offset-1 custyle">
-	    	<h3 class="text-middle">Sub Product List</h3> 
+	    	<h3 class="text-middle">Subproduct List</h3> 
 	        <table class="table table-striped custab">
 	        	<thead>
 	        	<a href="#" class="btn btn-primary btn-xs pull-right" ng-click="addSubProduct()"><b>+</b> Add new sub product</a>
-	        		<tr>
-	        			<th>Sub Product</th>
-	        			<th>Description</th>
-	        			<th>Edit</th>
-	        			<th class="text-center">Delete</th>
+	        	<br/>
+	        	<br/>
+	        		<tr class="bg-primary">
+	        			<th><strong>SUBPRODUCT</strong></th>
+	        			<th><strong>DESCRIPTION</strong></th>
+	        			<th class="text-center"><strong>EDIT</strong></th>
+	        			<th class="text-center"><strong>DELETE</strong></th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
 	        		<tr ng-repeat="subproduct in subproductList track by subproduct.id">
 	        			<th>{{subproduct.name}}</th>
 	        			<th>{{subproduct.desc}}</th>
-	        			<th><a href="/admindetails"><i class="fa fa-pencil-square-o text-primary" aria-hidden="true" ng-click="editSub(subproduct)"></i></a></th>
-	        			<th class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true" ng-click="deleteSubProduct(ev,subproduct)"></i></th>
+	        			<th th class="text-center"><a href="/admindetails"><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click="editSub(subproduct)"></i></a></th>
+	        			<th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteSubProduct(ev,subproduct)"></i></th>
 	        		</tr>
 	        	</tbody>
 	        </table>

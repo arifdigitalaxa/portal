@@ -1,9 +1,12 @@
 app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService', '$window', function($scope,$http,$mdDialog,ModalService,$window) {
-  
 
-$scope.productList;
+  $scope.productList;
 
- function alertStatus(ev,title,message){
+  var converter = new showdown.Converter()
+
+
+
+  function alertStatus(ev,title,message){
     $mdDialog.show(
           $mdDialog.alert()
           .parent(angular.element(document.querySelector('#main')))
@@ -14,70 +17,6 @@ $scope.productList;
           .ok('OK')
           .targetEvent(ev)
           );
-  }
-
-  $scope.deleteAnswer = function(ev,answer) {
-    // Appending dialog to document.body to cover sidenav in docs app
-
-    var confirm = $mdDialog.confirm()
-          .title('Delete answer')
-          .textContent('Confirm to delete answer '+answer.name+'?')
-          .ariaLabel('Delete answer')
-          .targetEvent(ev)
-          .ok('Delete')
-          .cancel('Cancel');
-
-    $mdDialog.show(confirm).then(function() {
-      $http({
-        method: 'DELETE',
-        url: '/answer/'+answer.id,
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
-       }).then(function success(response){
-          console.log(response)
-          alertStatus(ev,"Success",answer.name + " deleted!");
-          $scope.getAllAnswer();
-      }, function failed(err){
-          alertStatus(ev,"Error",answer.name + " not deleted!");
-      })
-
-    }, function() {
-      
-    });
-  };
-
-  $scope.addAnswer = function(ev){
-    ModalService.showModal({
-      templateUrl: "./modals/addAnswer.html",
-      controller: "answerModalController",
-      inputs: {
-        title: "Register New Answer",
-        question: $scope.question,
-        questionid: ''
-      }
-    }).then(function(modal) {
-      modal.element.modal();
-      modal.close.then(function(result) {
-        if(result){
-          console.log(result)
-          $http.post('/answer/create',{
-            name: result.name,
-            desc: result.desc,
-            questionid: result.question
-          })
-          .then(function success(response){
-              // console.log(response);
-
-              if(response == null){
-                return
-              }
-              alertStatus(ev,response.data.title,response.data.message);
-              $scope.getAllAnswer(ev)
-          }, function error(err){
-              alertStatus(ev,"Error",err)
-          })
-        }
-      });
-    });
   }
 
   $scope.getAllData = function(ev){
@@ -97,35 +36,7 @@ $scope.productList;
     }, function successRetrieve(err){
       console.log(err);
     })
-
-    $scope.deleteSubject = function(ev,subject) {
-    // Appending dialog to document.body to cover sidenav in docs app
-
-    var confirm = $mdDialog.confirm()
-          .title('Delete sub product')
-          .textContent('Confirm to delete product '+subject.name+'?')
-          .ariaLabel('Delete sub product')
-          .targetEvent(ev)
-          .ok('Delete')
-          .cancel('Cancel');
-
-    $mdDialog.show(confirm).then(function() {
-      $http({
-        method: 'DELETE',
-        url: '/subject/'+subject.id,
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
-       }).then(function success(response){
-          console.log(response)
-          alertStatus(ev,"Success",subject.name + " deleted!");
-          $scope.getAllSubject();
-      }, function failed(err){
-          alertStatus(ev,"Error",subject.name + " not deleted!");
-      })
-
-    }, function() {
-      
-    });
-  };
+  }
 
   $scope.addSubject = function(ev){
     ModalService.showModal({
@@ -152,7 +63,7 @@ $scope.productList;
                 return
               }
               alertStatus(ev,response.data.title,response.data.message);
-              $scope.getAllSubject(ev)
+              $scope.getAllData(ev)
           }, function error(err){
               alertStatus(ev,"Error",err)
           })
@@ -161,8 +72,164 @@ $scope.productList;
     });
   }
 
+  $scope.deleteSubject = function(ev,subject) {
+    // Appending dialog to document.body to cover sidenav in docs app
+
+    var confirm = $mdDialog.confirm()
+          .title('Delete Subject')
+          .textContent('Confirm to delete subject '+subject.name+'?')
+          .ariaLabel('Delete subject')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      $http({
+        method: 'DELETE',
+        url: '/subject/'+subject.id,
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+       }).then(function success(response){
+          console.log(response)
+          alertStatus(ev,"Success",subject.name + " deleted!");
+          $scope.getAllData();
+      }, function failed(err){
+          alertStatus(ev,"Error",subject.name + " not deleted!");
+      })
+
+    }, function() {
+      
+    });
   }
 
-  
+  $scope.addQuestion = function(ev){
+    ModalService.showModal({
+      templateUrl: "./modals/addQuestion.html",
+      controller: "questionModalController",
+      inputs: {
+        title: "Register New Question",
+        subject: $scope.subjectList,
+        subjectid: ''
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/question/create',{
+            name: result.name,
+            desc: result.desc,
+            subjectid: result.subject
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
+              $scope.getAllData(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
+
+  $scope.deleteQuestion = function(ev,question) {
+    // Appending dialog to document.body to cover sidenav in docs app
+
+    var confirm = $mdDialog.confirm()
+          .title('Delete sub product')
+          .textContent('Confirm to delete question '+question.name+'?')
+          .ariaLabel('Delete question')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      $http({
+        method: 'DELETE',
+        url: '/question/'+question.id,
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+       }).then(function success(response){
+          console.log(response)
+          alertStatus(ev,"Success",question.name + " deleted!");
+          $scope.getAllData();
+      }, function failed(err){
+          alertStatus(ev,"Error",question.name + " not deleted!");
+      })
+
+    }, function() {
+      
+    });
+  }
+
+  $scope.addAnswer = function(ev){
+    ModalService.showModal({
+      templateUrl: "./modals/addAnswer.html",
+      controller: "answerModalController",
+      inputs: {
+        title: "Add New Answer",
+        question: $scope.questionList,
+        questionid: ''
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          console.log(result)
+          $http.post('/answer/create',{
+            name: result.name,
+            desc: result.desc,
+            questionid: result.question
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
+              $scope.getAllData(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
+
+  $scope.deleteAnswer = function(ev,answer) {
+    // Appending dialog to document.body to cover sidenav in docs app
+
+    var confirm = $mdDialog.confirm()
+          .title('Delete answer')
+          .textContent('Confirm to delete answer '+answer.name+'?')
+          .ariaLabel('Delete answer')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      $http({
+        method: 'DELETE',
+        url: '/answer/'+answer.id,
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+       }).then(function success(response){
+          console.log(response)
+          alertStatus(ev,"Success",answer.name + " deleted!");
+          $scope.getAllData();
+      }, function failed(err){
+          alertStatus(ev,"Error",answer.name + " not deleted!");
+      })
+
+    }, function() {
+      
+    });
+  }
+
+  $scope.returnHtml = function(answer){
+    return converter.makeHtml(answer);
+  }
 
 }]);

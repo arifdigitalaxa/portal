@@ -3,9 +3,9 @@ app.controller('subjectModalController', [
   function($scope, $element, title, subproduct, subjectid, close) {
 
   $scope.title = title;
-  $scope.subproductList = subproduct
+  $scope.subproduct = subproduct
   $scope.subject = {}
-  $scope.subject["subproduct"] = subjectid
+  $scope.subject["subproduct"] = subproduct.id
   //  This close function doesn't need to use jQuery or bootstrap, because
   //  the button has the 'data-dismiss' attribute.
   $scope.close = function() {

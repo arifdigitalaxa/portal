@@ -43,7 +43,7 @@ $scope.productList;
     }, function() {
       
     });
-  };
+  }
 
   $scope.addAnswer = function(ev){
     ModalService.showModal({

@@ -1,5 +1,11 @@
-<div id='main' ng-controller="AdminProductController" ng-init ="getAllProduct()">
-    <div class="row col-md-10 col-md-offset-1 custyle" ng-cloak>
+<div id='main' ng-controller="AdminProductController" ng-init ="getAllProduct()" ng-cloak>
+	<div class="container">
+		<ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+        	<li class="active">Product Management</li>
+        </ol> 
+        <div class="row col-md-10 col-md-offset-1 custyle" >
 	    	<h3 class="text-center"><strong>Product List</strong></h3> 
 	        <table class="table table-striped custab text-center">
 	        	<thead>
@@ -23,5 +29,6 @@
 	        	</tbody>
 	        </table>
 	    </div>
+	</div>
 </div>
 
