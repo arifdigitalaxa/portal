@@ -6,6 +6,8 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window',function(
   $scope.subjectid;
   $scope.keyword = '';
 
+  var converter = new showdown.Converter()
+
   $scope.data;
 
   $scope.getsubproduct = function(){
@@ -67,6 +69,10 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window',function(
     }, function errorGet(err){
       console.log(err)
     })
+  }
+
+  $scope.returnHtml = function(answer){
+    return converter.makeHtml(answer);
   }
 
 }]);

@@ -35,12 +35,31 @@ module.exports = {
 	},
 
 	getAllProduct: function(req,res){
-		Product.find({}, function(err,productList){
+
+		var async = require("async");
+
+		var productList = [];
+
+		Product.find({}, function(err,prodList){
 			if(err){
 				res.json(err)
 			}
 
-			res.json(productList);
+			async.each(prodList,function(product,callback){
+
+				Subproduct.find({
+					product: product.id
+				})
+				.exec(function(err, subproduct){
+					product["subproduct"] = subproduct;
+
+					productList.push(product)
+
+					callback()
+				})
+			},function(err){
+				res.json(productList);
+			})
 		})
 	},
 

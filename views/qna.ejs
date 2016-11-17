@@ -22,7 +22,7 @@
               </span>
             </div>
         </div>
-        <div class="row col-md-8 col-md-offset-2">
+        <div class="row col-md-12">
             <br/>
             <div class="panel-group" id="accordion">
               <div class="panel panel-default" ng-repeat="question in questionList">
@@ -34,7 +34,7 @@
                 </div>
                 <div id="{{question.id}}" class="panel-collapse collapse">
                   <div class="panel-body" ng-repeat="answer in question.answer">
-                    {{answer.desc}}
+                    <h4><p ng-bind-html="returnHtml(answer.desc)"></p></h>
                   </div>
                 </div>
               </div>

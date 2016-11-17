@@ -1,5 +1,6 @@
 <div class="modal fade">
-  <div class="modal-dialog modal-md">
+  <script src="/js/dependencies/bootstrap-markdown.js"></script>
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -24,7 +25,7 @@
 		  <div class="form-group">
 		    <label for="email" class="col-sm-2 control-label">Description</label>
 		    <div class="col-sm-10">
-		      <textarea class="form-control" rows="5" id="desc" ng-model="answer.desc"></textarea>
+		      <textarea class="form-control" rows="15" id="desc" ng-model="answer.desc" data-provide="markdown"></textarea>
 		    </div>
 		  </div>
 		</form>

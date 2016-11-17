@@ -5,7 +5,26 @@
         </ol> 
         <div class="row col-md-8 col-md-offset-2 custyle">
             <p><h2  class="text-center"><strong>Product List</strong></h2></p>  
-            <div class="list-group" ng-cloak>  
+
+            <div class="panel-group">
+              <div class="panel panel-default" ng-repeat="product in productList track by product.id" ng-click="selectProduct(product)">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" ng-href="#{{product.id}}">{{product.name}}</a>
+                  </h4>
+                </div>
+                <div id="{{product.id}}" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <li class="list-group-item">One</li>
+                    <li class="list-group-item">Two</li>
+                    <li class="list-group-item">Three</li>
+                  </ul>
+                  <div class="panel-footer">Footer</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-group">  
             <a ng-href="/subproductlist" class="list-group-item" ng-repeat="product in productList track by product.id" ng-click="selectProduct(product)">                  
                 <h4 class="list-group-item-heading"><strong>{{product.name}}</strong></h4>  
                 <p class="list-group-item-text">{{product.desc}}</p>  
