@@ -19,7 +19,7 @@ module.exports = {
     	model: 'subproduct'
     },
 
-    question : {
+  question : {
     	model: 'question',
     	via: 'subject'
     }

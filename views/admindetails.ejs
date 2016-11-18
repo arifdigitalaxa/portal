@@ -34,6 +34,7 @@
               <a class="btn btn-default btn-primary" ng-click="addSubject()"><i class="fa fa-plus" aria-hidden="true"></i> Add Subject</a>
               <a class="btn btn-default btn-primary" ng-click="addQuestion()"><i class="fa fa-plus" aria-hidden="true"></i> Add Question</a>
               <a class="btn btn-default btn-primary" ng-click="addAnswer()"><i class="fa fa-plus" aria-hidden="true"></i> Add Answer</a>
+              <a class="btn btn-default btn-primary" ng-click="addDoc()"><i class="fa fa-plus" aria-hidden="true"></i> Add Document</a>
               <a class="btn btn-default btn-danger" ng-click="addSubject()"><i class="fa fa-trash" aria-hidden="true"></i> Delete Subproduct</a>
             </div>
           </div>
@@ -116,7 +117,16 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="file">
           <h3 class="text-center"><strong>Document List</strong></h3> 
-            
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="file" ngf-select ng-model="picFile" name="file"    
+             accept="image/*" ngf-max-size="20MB" required
+             ngf-model-invalid="errorFile">
+                  <input type="text" class="form-control" id="name" ng-model="file.$ngfName">
+                  <button type="submit" ng-click="submit()"><i class="fa fa-upload" aria-hidden="true"></i>Upload</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

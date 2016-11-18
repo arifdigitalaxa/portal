@@ -1,4 +1,4 @@
-app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService', '$window', function($scope,$http,$mdDialog,ModalService,$window) {
+app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService', '$window','Upload', function($scope,$http,$mdDialog,ModalService,$window,Upload) {
 
   $scope.productList;
 
@@ -227,6 +227,12 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
       
     });
   }
+
+  $scope.uploadFile = function() {
+      if ($scope.form.file.$valid && $scope.file) {
+        $scope.upload($scope.file);
+      }
+    };
 
   $scope.returnHtml = function(answer){
     return converter.makeHtml(answer);

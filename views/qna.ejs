@@ -2,7 +2,6 @@
     <div class="container" ng-cloak>
         <ol class="breadcrumb">
           <li><a href="/">Home</a></li>
-          <li><a href="/subproductlist">Subproduct</a></li>
           <li class="active">{{subproduct.name}}</li>
         </ol>  
         <div class="row col-md-8 col-md-offset-2 custyle">
@@ -28,13 +27,13 @@
               <div class="panel panel-default" ng-repeat="question in questionList">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" ng-href="#{{question.id}}">
+                    <a data-toggle="collapse" class="accordion-toggle collapsed" data-parent="#accordion" ng-href="#{{question.id}}">
                     {{question.name}}</a>
                   </h4>
                 </div>
                 <div id="{{question.id}}" class="panel-collapse collapse">
                   <div class="panel-body" ng-repeat="answer in question.answer">
-                    <h4><p ng-bind-html="returnHtml(answer.desc)"></p></h>
+                    <h4 class="condensedlines"><p ng-bind-html="returnHtml(answer.desc)"></p></h>
                   </div>
                 </div>
               </div>
