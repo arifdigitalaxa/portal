@@ -229,9 +229,7 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
   }
 
   $scope.uploadFile = function() {
-      if ($scope.form.file.$valid && $scope.file) {
-        $scope.upload($scope.file);
-      }
+      console.log($scope.file)
     };
 
   $scope.returnHtml = function(answer){
