@@ -14,6 +14,12 @@ module.exports = {
 	type: {
 		type: 'string'
 	},
+	size: {
+		type: 'string'
+	},
+	url: {
+		type: 'string'
+	},
 	
   	subproduct: {
     	model: 'subproduct'

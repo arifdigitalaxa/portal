@@ -34,7 +34,7 @@
               <a class="btn btn-default btn-primary" ng-click="addSubject()"><i class="fa fa-plus" aria-hidden="true"></i> Add Subject</a>
               <a class="btn btn-default btn-primary" ng-click="addQuestion()"><i class="fa fa-plus" aria-hidden="true"></i> Add Question</a>
               <a class="btn btn-default btn-primary" ng-click="addAnswer()"><i class="fa fa-plus" aria-hidden="true"></i> Add Answer</a>
-              <a class="btn btn-default btn-primary" ng-click="addDoc()"><i class="fa fa-plus" aria-hidden="true"></i> Add Document</a>
+              <a class="btn btn-default btn-primary" ng-click="addDocument()"><i class="fa fa-plus" aria-hidden="true"></i> Add Document</a>
               <a class="btn btn-default btn-danger" ng-click="addSubject()"><i class="fa fa-trash" aria-hidden="true"></i> Delete Subproduct</a>
             </div>
           </div>
@@ -117,14 +117,26 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="file">
           <h3 class="text-center"><strong>Document List</strong></h3> 
-            <div class="row">
-              <div class="col-lg-12">
-                <input type="file" ngf-select ng-model="file" name="file"    
-             accept="image/*" ngf-max-size="20MB" required
-             ngf-model-invalid="errorFile">
-                  <button type="submit" ng-click="uploadFile()"><i class="fa fa-upload" aria-hidden="true"></i>Upload</button>
-              </div>
-            </div>
+          <table class="table table-striped custab">
+            <thead>
+              <tr class="bg-primary">
+                <th>DOCUMENT</th>
+                <th>SIZE</th>
+                <th>TYPE</th>
+                <!-- <th>Edit</th> -->
+                <th class="text-center">DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="file in fileList track by file.id">
+                <th>{{file.name}}</th>
+                <th>{{file.size}}</th>
+                <th>{{file.type}}</th>
+                <!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+                <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteFile(ev,answer)"></i></th>
+              </tr>
+            </tbody>
+          </table>
           </div>
         </div>
       </div>

@@ -228,6 +228,35 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
     });
   }
 
+  $scope.addDocument = function(ev){
+    ModalService.showModal({
+      templateUrl: "./modals/addDocument.html",
+      controller: "documentModalController",
+      inputs: {
+        title: "Upload Document"
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          console.log(result)
+
+          Upload.upload({
+            url: 'admin/uploadDoc',
+            data: {
+              file: result
+            }
+          })
+          .success(function(data){
+            console.log(data);
+          }).error(function(err){
+            console.log(err);
+          });
+        }
+      });
+    });
+  }
+
   $scope.uploadFile = function() {
       console.log($scope.file)
     };
