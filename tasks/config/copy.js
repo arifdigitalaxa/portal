@@ -42,6 +42,7 @@ module.exports = function(grunt) {
               './node_modules/angular-ui-bootstap/dist/ui-bootstrap.js',
               './node_modules/angular-sanitize/angular-sanitize.min.js',
               './node_modules/ng-file-upload/dist/ng-file-upload.min.js',
+              './node_modules/angular-file-saver/dist/angular-file-saver.bundle.js',
               './node_modules/showdown/dist/showdown.min.js'
               ],
         dest: '.tmp/public/js/dependencies'

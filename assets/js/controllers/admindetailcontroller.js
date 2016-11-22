@@ -351,6 +351,8 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
       },
       responseType: 'blob'
     }).success(function (data, status, headers, config) {
+        console.log(blob)
+
         var blob = new Blob([data], { type: 'image/jpeg' });
         var fileName = headers('content-disposition');
         var fileURL = URL.createObjectURL(blob);
