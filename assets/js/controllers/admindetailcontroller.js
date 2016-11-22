@@ -32,7 +32,15 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
       $scope.questionList = response.data.question;
       $scope.answerList = response.data.answer;
 
-      console.log(response)
+      $http.post('/admin/getFileList',{
+        id: $window.sessionStorage.subproductID
+      }).then(function getFile(file){
+        $scope.fileList = file.data
+        console.log($scope.fileList)
+      }, function errFound(err){
+          console.log(err);
+      })
+
     }, function successRetrieve(err){
       console.log(err);
     })
@@ -244,11 +252,18 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
           Upload.upload({
             url: 'admin/uploadDoc',
             data: {
+              subproduct: $scope.subproduct,
               file: result
             }
           })
           .success(function(data){
-            console.log(data);
+            if(data == null){
+                return
+            }
+            
+            alertStatus(ev,'Upload Complete!','File uploaded successfully');
+
+            $scope.getAllData(ev)
           }).error(function(err){
             console.log(err);
           });
@@ -257,9 +272,104 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
     });
   }
 
-  $scope.uploadFile = function() {
-      console.log($scope.file)
-    };
+  $scope.deleteDocument = function(ev,file) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('Delete file')
+          .textContent('Confirm to delete file '+file.name+'?')
+          .ariaLabel('Delete file')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      // $http({
+      //       method: 'DELETE',
+      //       url: '/files/'+file.id,
+      //       headers: {'Content-Type': 'application/json;charset=utf-8'}
+      //      }).then(function success(response){
+      //         console.log(response)
+      //         alertStatus(ev,"Success",file.name + " deleted!");
+      //         $scope.getAllData();
+      //     }, function failed(err){
+      //         alertStatus(ev,"Error",file.name + " not deleted!");
+      //     })
+      // $http.post('/files/deleteFile',{
+      //   id: file.id
+      // }).then(function success(data){
+      //   if(data.message){
+      //     $http({
+      //       method: 'DELETE',
+      //       url: '/files/'+file.id,
+      //       headers: {'Content-Type': 'application/json;charset=utf-8'}
+      //      }).then(function success(response){
+      //         console.log(response)
+      //         alertStatus(ev,"Success",file.name + " deleted!");
+      //         $scope.getAllData();
+      //     }, function failed(err){
+      //         alertStatus(ev,"Error",file.name + " not deleted!");
+      //     })
+      //   }
+      //   else{
+      //         alertStatus(ev,"Error",file.name + " not deleted!");
+      //   }
+      // })
+      $http.post('/files/deleteFile',{
+        id: file.id
+      }).then(function success(data){
+        console.log(data.message)
+        // if(data.message){
+          $http({
+            method: 'DELETE',
+            url: '/files/'+file.id,
+            headers: {'Content-Type': 'application/json;charset=utf-8'}
+           }).then(function success(response){
+              console.log(response)
+              alertStatus(ev,"Success",file.name + " deleted!");
+              $scope.getAllData();
+          }, function failed(err){
+              alertStatus(ev,"Error",file.name + " not deleted!");
+          })
+        // }
+        // else{
+        //       alertStatus(ev,"Error",file.name + " not deleted!");
+        // }
+      })
+      
+
+    }, function() {
+      
+    });
+  }
+
+  $scope.viewDocument = function(file){
+    $http({
+      url: '/files/showFile',
+      method: "POST",
+      data: {
+        id: file.id
+      },
+      responseType: 'blob'
+    }).success(function (data, status, headers, config) {
+        var blob = new Blob([data], { type: 'image/jpeg' });
+        var fileName = headers('content-disposition');
+        var fileURL = URL.createObjectURL(blob);
+        window.open(fileURL);
+    }).error(function (data, status, headers, config) {
+      console.log('Unable to download the file')
+    });
+    // $http.post('/files/showFile',{
+    //   id: file.id
+    // },{responseType: 'blob'})
+    // .then(function success(data){
+    //   //console.log(data.data)
+    //   var file = new Blob([data], {type: 'image/jpeg'});
+    //   var fileURL = URL.createObjectURL(file);
+    //   window.open(fileURL);
+    // }, function failedRetrieve(err){
+    //   console.log(err);
+    // })
+  }
 
   $scope.returnHtml = function(answer){
     return converter.makeHtml(answer);

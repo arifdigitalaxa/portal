@@ -17,7 +17,7 @@ module.exports = {
 	size: {
 		type: 'string'
 	},
-	url: {
+	fd: {
 		type: 'string'
 	},
 	

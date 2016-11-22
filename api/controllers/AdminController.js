@@ -10,8 +10,6 @@ module.exports = {
 	getAllDataDetail: function(req,res){
 		var async = require("async");
 
-		console.log(req.param('id'))
-
 		Subproduct.findOne({
 			id: req.param('id')
 		})
@@ -100,26 +98,46 @@ module.exports = {
 	},
 
 	uploadDoc: function(req,res){
+
+		var subID = req.body['subproduct[id]']
+
+		var dir = '../../assets/fileuploads/'+subID
+
 		req.file('file').upload({
+			dirname: dir,
 	    // don't allow the total upload size to exceed ~10MB
-	    maxBytes: 10000000
-	  },function whenDone(err, uploadedFiles) {
-	    if (err) {
-	      return res.negotiate(err);
-	    }
+	    	maxBytes: 10000000
+	  	},function whenDone(err, uploadedFiles) {
+		    if (err) {
+		      return res.negotiate(err);
+		    }
 
-	    if (uploadedFiles.length === 0){
-	      return res.json('No file was uploaded');
-	    }
-	    console.log(uploadedFiles)
 
-	    // If no files were uploaded, respond with an error.
-	    return res.json(uploadedFiles[0]);
-	  });
+		    if (uploadedFiles.length === 0){
+		      return res.json('No file was uploaded');
+		    }
+	    	
+	    	console.log(uploadedFiles[0])
+
+	    	Files.create({
+	    		name: uploadedFiles[0].filename,
+	    		type: uploadedFiles[0].type,
+	    		size: uploadedFiles[0].size,
+	    		fd: uploadedFiles[0].fd,
+	    		subproduct: subID
+	    	}).exec(function(err,file){
+	   	 		return res.json({ message: 'success'});
+	    	})
+	  	});
 	},
 
-	mapDoc: function(req,res){
+	getFileList: function(req,res){
 
+		Files.find({
+	    	subproduct: req.param('id')
+	    }).exec(function(err,fileList){
+	   		return res.json(fileList);
+	    })
 
 	}
 	
