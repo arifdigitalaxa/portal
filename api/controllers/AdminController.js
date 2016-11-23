@@ -100,6 +100,8 @@ module.exports = {
 	uploadDoc: function(req,res){
 
 		var subID = req.body['subproduct[id]']
+		var desc = req.body['desc']
+		var tags = req.body['tags']
 
 		var dir = '../../assets/fileuploads/'+subID
 
@@ -124,6 +126,8 @@ module.exports = {
 	    		type: uploadedFiles[0].type,
 	    		size: uploadedFiles[0].size,
 	    		fd: uploadedFiles[0].fd,
+	    		desc: desc,
+	    		tags: tags,
 	    		subproduct: subID
 	    	}).exec(function(err,file){
 	   	 		return res.json({ message: 'success'});

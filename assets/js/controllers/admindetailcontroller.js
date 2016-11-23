@@ -247,13 +247,15 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
       modal.element.modal();
       modal.close.then(function(result) {
         if(result){
-          console.log(result)
+          //console.log(result)
 
           Upload.upload({
             url: 'admin/uploadDoc',
             data: {
               subproduct: $scope.subproduct,
-              file: result
+              desc: result.desc,
+              tags: result.tags,
+              file: result.file
             }
           })
           .success(function(data){

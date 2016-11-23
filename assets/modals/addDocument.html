@@ -1,7 +1,4 @@
 <div class="modal fade">
-  <script>
-  new Taggle('tags');
-  </script>
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,8 +8,9 @@
       <div class="modal-body">
 		<form class="form-horizontal" role="form">
 		  <div class="form-group">
-		    <div class="col-sm-9">
-			  <input type="file" ngf-select ng-model="file" name="file"    
+        <label for="email" class="col-sm-2 control-label">File</label>
+		    <div class="col-sm-10">
+			  <input type="file" ngf-select ng-model="data.file" name="file"    
              accept="image/*" ngf-max-size="10MB" required
              ngf-model-invalid="errorFile">
 		    </div>
@@ -20,13 +18,13 @@
       <div class="form-group">
         <label for="email" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-10">
-          <textarea class="form-control" rows="5" id="desc" placeholder="Insert file description, eg; Claim forms" ng-model="question.desc"></textarea>
+          <textarea class="form-control" rows="5" id="desc" placeholder="Insert file description, eg; Claim forms" ng-model="data.desc"></textarea>
         </div>
       </div>
       <div class="form-group">
         <label for="email" class="col-sm-2 control-label">Tags</label>
         <div class="col-sm-10">
-          <div id="tags"></div>
+          <tags-input ng-model="tagging"></tags-input>
         </div>
       </div>
 		</form>

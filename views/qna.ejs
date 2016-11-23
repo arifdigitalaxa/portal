@@ -60,18 +60,18 @@
             <table class="table table-striped custab">
               <thead>
                 <tr class="bg-primary">
-                  <th>DOCUMENT</th>
-                  <th>SIZE</th>
+                  <th>DOCUMENT DESC</th>
                   <th>TYPE</th>
+                  <th>TAGS</th>
                   <th class="text-center">VIEW</th>
                   <th class="text-center">DOWNLOAD</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="file in fileList track by file.id">
-                  <th>{{file.name}}</th>
-                  <th>{{file.size}}</th>
+                  <th>{{file.desc}}</th>
                   <th>{{file.type}}</th>
+                  <th>{{file.tags}}</th>
                   <th class="text-center"><i class="fa fa-eye text-success fa-lg" aria-hidden="true" ng-click="viewDocument(file)"></i></th>
                   <th class="text-center"><i class="fa fa-download text-primary fa-lg" aria-hidden="true" ng-click="downloadDocument(file)"></i></th>
                 </tr>
