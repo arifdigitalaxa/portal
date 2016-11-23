@@ -33,12 +33,12 @@ module.exports = {
     		id: req.body['id']
     	})
     	.exec(function(err, file){
-    		res.attachment(file.fd)
-    		// fileAdapter.read(file.fd)
-    		// .on('error', function (err){
-      // 			return res.serverError(err);
-    		// })
-    		// .pipe(res);
+    		// res.attachment(file.fd)
+    		fileAdapter.read(file.fd)
+    		.on('error', function (err){
+      			return res.serverError(err);
+    		})
+    		.pipe(res);
     	})
 	}
 	

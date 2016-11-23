@@ -1,4 +1,4 @@
-app.controller('qnaController',['$scope','$http','dataTrans','$window',function($scope,$http,dataTrans,$window) {
+app.controller('qnaController',['$scope','$http','dataTrans','$window','FileSaver',function($scope,$http,dataTrans,$window,FileSaver) {
   
   $scope.subproduct;
   $scope.subjectList;
@@ -29,14 +29,22 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window',function(
   }
 
   $scope.getData = function(){
-      console.log($window.sessionStorage.subproductID)
       $http.post('qna/getSubProductSubjects',{
         id: $window.sessionStorage.subproductID
       })
       .then(function success(response){
-          console.log(response)
+          
           $scope.subproduct = response.data.subproduct
           $scope.subjectList = response.data.subject
+
+          $http.post('/admin/getFileList',{
+            id: $window.sessionStorage.subproductID
+          }).then(function getFile(file){
+            $scope.fileList = file.data
+          }, function errFound(err){
+              console.log(err);
+          })
+
       }, function errorGet(err){
         console.log(err);
       })
@@ -73,6 +81,32 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window',function(
 
   $scope.returnHtml = function(answer){
     return converter.makeHtml(answer);
+  }
+
+  $scope.downloadDocument = function(file){
+    $http.post('/files/showFile',{
+      id: file.id
+    },{responseType: 'blob'})
+    .then(function success(files){
+      var blob = new Blob([files.data], { type: file.type });
+      FileSaver.saveAs(blob, file.name);
+    }, function failedRetrieve(err){
+      console.log(err);
+    })
+  }
+
+  $scope.viewDocument = function(file){
+    $http.post('/files/showFile',{
+      id: file.id
+    },{responseType: 'blob'})
+    .then(function success(files){
+      var blob = new Blob([files.data], { type: file.type });
+      var fileURL = URL.createObjectURL(blob);
+      window.open(fileURL)
+      //FileSaver.saveAs(blob, file.name);
+    }, function failedRetrieve(err){
+      console.log(err);
+    })
   }
 
 }])

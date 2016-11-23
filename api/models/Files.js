@@ -11,6 +11,9 @@ module.exports = {
   	name: {
 	   type: 'string'
 	},
+	desc: {
+		type: 'string'
+	},
 	type: {
 		type: 'string'
 	},
@@ -18,6 +21,9 @@ module.exports = {
 		type: 'string'
 	},
 	fd: {
+		type: 'string'
+	},
+	tags: {
 		type: 'string'
 	},
 	

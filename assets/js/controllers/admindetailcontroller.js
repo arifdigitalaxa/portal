@@ -1,4 +1,4 @@
-app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService', '$window','Upload', function($scope,$http,$mdDialog,ModalService,$window,Upload) {
+app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalService', '$window','Upload','FileSaver', function($scope,$http,$mdDialog,ModalService,$window,Upload,FileSaver) {
 
   $scope.productList;
 
@@ -283,42 +283,9 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
           .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function() {
-      // $http({
-      //       method: 'DELETE',
-      //       url: '/files/'+file.id,
-      //       headers: {'Content-Type': 'application/json;charset=utf-8'}
-      //      }).then(function success(response){
-      //         console.log(response)
-      //         alertStatus(ev,"Success",file.name + " deleted!");
-      //         $scope.getAllData();
-      //     }, function failed(err){
-      //         alertStatus(ev,"Error",file.name + " not deleted!");
-      //     })
-      // $http.post('/files/deleteFile',{
-      //   id: file.id
-      // }).then(function success(data){
-      //   if(data.message){
-      //     $http({
-      //       method: 'DELETE',
-      //       url: '/files/'+file.id,
-      //       headers: {'Content-Type': 'application/json;charset=utf-8'}
-      //      }).then(function success(response){
-      //         console.log(response)
-      //         alertStatus(ev,"Success",file.name + " deleted!");
-      //         $scope.getAllData();
-      //     }, function failed(err){
-      //         alertStatus(ev,"Error",file.name + " not deleted!");
-      //     })
-      //   }
-      //   else{
-      //         alertStatus(ev,"Error",file.name + " not deleted!");
-      //   }
-      // })
       $http.post('/files/deleteFile',{
         id: file.id
       }).then(function success(data){
-        console.log(data.message)
-        // if(data.message){
           $http({
             method: 'DELETE',
             url: '/files/'+file.id,
@@ -330,47 +297,36 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
           }, function failed(err){
               alertStatus(ev,"Error",file.name + " not deleted!");
           })
-        // }
-        // else{
-        //       alertStatus(ev,"Error",file.name + " not deleted!");
-        // }
       })
-      
-
     }, function() {
       
     });
   }
 
-  $scope.viewDocument = function(file){
-    $http({
-      url: '/files/showFile',
-      method: "POST",
-      data: {
-        id: file.id
-      },
-      responseType: 'blob'
-    }).success(function (data, status, headers, config) {
-        console.log(blob)
+  $scope.downloadDocument = function(file){
+    $http.post('/files/showFile',{
+      id: file.id
+    },{responseType: 'blob'})
+    .then(function success(files){
+      var blob = new Blob([files.data], { type: file.type });
+      FileSaver.saveAs(blob, file.name);
+    }, function failedRetrieve(err){
+      console.log(err);
+    })
+  }
 
-        var blob = new Blob([data], { type: 'image/jpeg' });
-        var fileName = headers('content-disposition');
-        var fileURL = URL.createObjectURL(blob);
-        window.open(fileURL);
-    }).error(function (data, status, headers, config) {
-      console.log('Unable to download the file')
-    });
-    // $http.post('/files/showFile',{
-    //   id: file.id
-    // },{responseType: 'blob'})
-    // .then(function success(data){
-    //   //console.log(data.data)
-    //   var file = new Blob([data], {type: 'image/jpeg'});
-    //   var fileURL = URL.createObjectURL(file);
-    //   window.open(fileURL);
-    // }, function failedRetrieve(err){
-    //   console.log(err);
-    // })
+  $scope.viewDocument = function(file){
+    $http.post('/files/showFile',{
+      id: file.id
+    },{responseType: 'blob'})
+    .then(function success(files){
+      var blob = new Blob([files.data], { type: file.type });
+      var fileURL = URL.createObjectURL(blob);
+      window.open(fileURL)
+      //FileSaver.saveAs(blob, file.name);
+    }, function failedRetrieve(err){
+      console.log(err);
+    })
   }
 
   $scope.returnHtml = function(answer){

@@ -6,38 +6,78 @@
         </ol>  
         <div class="row col-md-8 col-md-offset-2 custyle">
             <p><h2  class="text-center"><strong>{{subproduct.name}}</strong></h2></p>
-        </div>  
-        <div class="row col-md-8 col-md-offset-2">
-             <select class="form-control" id="subject" ng-model="subject" ng-options="subject.id as subject.name for subject in subjectList" ng-change="getQuestion(subject)">
-                    <option>{{subject}}</option>
-                </select>
+        </div> 
+
+        <div class="row">
+          <br>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#faq" aria-controls="faq" role="tab" data-toggle="tab"><i class="fa fa-question-circle" aria-hidden="true"></i> FAQS</a></li>
+            <li role="presentation"><a href="#document" aria-controls="document" role="tab" data-toggle="tab"> <i class="fa fa-folder" aria-hidden="true"></i> Documents</a></li>
+          </ul> 
         </div>
-        <div class="row col-md-8 col-md-offset-2">
-            <br/>
-            <div class="input-group" ng-show="subject">
-              <input type="text" class="form-control"  ng-model="keyword" placeholder="Search questions">
-              <!-- <input type="text" class="form-control"  ng-model="keyword" ng-change="getText(keyword)" placeholder="Search questions"> -->
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-              </span>
-            </div>
-        </div>
-        <div class="row col-md-12">
-            <br/>
-            <div class="panel-group" id="accordion">
-              <div class="panel panel-default" ng-repeat="question in questionList | filter:keyword">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" class="accordion-toggle collapsed" data-parent="#accordion" ng-href="#{{question.id}}" ng-bind-html="question.name| highlight:keyword"></a>
-                  </h4>
-                </div>
-                <div id="{{question.id}}" class="panel-collapse collapse">
-                  <div class="panel-body" ng-repeat="answer in question.answer | filter:keyword">
-                    <h4 class="condensedlines"><p ng-bind-html="returnHtml(answer.desc) | highlight:keyword"></p></h>
+        
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="faq">
+            <br>
+            <br>
+             <div class="row col-md-8 col-md-offset-2">
+                   <select class="form-control" id="subject" ng-model="subject" ng-options="subject.id as subject.name for subject in subjectList" ng-change="getQuestion(subject)">
+                          <option value="">Please choose a subject....</option>
+                      </select>
+             </div>
+             <div class="row col-md-8 col-md-offset-2">
+                  <br/>
+                  <div class="input-group" ng-show="subject">
+                    <input type="text" class="form-control"  ng-model="keyword" placeholder="Search questions">
+                    <!-- <input type="text" class="form-control"  ng-model="keyword" ng-change="getText(keyword)" placeholder="Search questions"> -->
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                  </div>
+             </div>
+             <div class="row col-md-12">
+                <br/>
+                <div class="panel-group" id="accordion">
+                  <div class="panel panel-default" ng-repeat="question in questionList | filter:keyword">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" class="accordion-toggle collapsed" data-parent="#accordion" ng-href="#{{question.id}}" ng-bind-html="question.name| highlight:keyword"></a>
+                      </h4>
+                    </div>
+                    <div id="{{question.id}}" class="panel-collapse collapse">
+                      <div class="panel-body" ng-repeat="answer in question.answer | filter:keyword">
+                        <h4 class="condensedlines"><p ng-bind-html="returnHtml(answer.desc) | highlight:keyword"></p></h>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+             </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="document">
+            <br>
+            <br>
+            <h3 class="text-center"><strong>Document List</strong></h3> 
+            <table class="table table-striped custab">
+              <thead>
+                <tr class="bg-primary">
+                  <th>DOCUMENT</th>
+                  <th>SIZE</th>
+                  <th>TYPE</th>
+                  <th class="text-center">VIEW</th>
+                  <th class="text-center">DOWNLOAD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="file in fileList track by file.id">
+                  <th>{{file.name}}</th>
+                  <th>{{file.size}}</th>
+                  <th>{{file.type}}</th>
+                  <th class="text-center"><i class="fa fa-eye text-success fa-lg" aria-hidden="true" ng-click="viewDocument(file)"></i></th>
+                  <th class="text-center"><i class="fa fa-download text-primary fa-lg" aria-hidden="true" ng-click="downloadDocument(file)"></i></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
     </div>  
 </div>
