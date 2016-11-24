@@ -31,6 +31,21 @@ module.exports = {
 		})
 	},
 
+	edit: function(req,res){
+		Subproduct.update({
+			id: req.param('id')
+		},{
+			name: req.param('name'),
+			desc: req.param('desc')
+		}).exec(function(err,updated){
+			if(err){
+				return res.json(err)
+			}
+
+			res.json({message: 'Subproduct updated'})
+		})
+	},
+
 	getAllSubProduct: function(req,res){
 		Product.find({})
 		.exec( function(err,productList){

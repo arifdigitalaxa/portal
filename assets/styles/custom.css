@@ -14,8 +14,10 @@
     content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }
 .highlighted { background: yellow }
+
 a {text-decoration: none; color:black }
 a.hover {text-decoration: none}
+
 .span-doc {
 	background-color: #337ab7;
 	color: white

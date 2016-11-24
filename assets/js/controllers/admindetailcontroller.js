@@ -46,6 +46,68 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
     })
   }
 
+  $scope.deleteSubProduct = function(ev) {
+
+    var confirm = $mdDialog.confirm()
+          .title('Delete sub product')
+          .textContent('Confirm to delete product '+$scope.subproduct.name+'? Deleted data cannot be recovered')
+          .ariaLabel('Delete sub product')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      $http({
+        method: 'DELETE',
+        url: '/subproduct/'+$scope.subproduct.id,
+        headers: {'Content-Type': 'application/json;charset=utf-8'}
+       }).then(function success(response){
+          alertStatus(ev,"Success",$scope.subproduct.name + " deleted!");
+          $window.location.href ='/subproduct'
+      }, function failed(err){
+          alertStatus(ev,"Error",$scope.subproduct.name + " not deleted!");
+      })
+
+    }, function() {
+      
+    });
+  }
+
+  $scope.editSubProduct = function(ev){
+    console.log('this is triggered')
+    ModalService.showModal({
+      templateUrl: "./modals/editSubproduct.html",
+      controller: "editSubproductModalController",
+      inputs: {
+        title: "Edit Sub Product",
+        product: $scope.product,
+        subproduct: $scope.subproduct,
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/subproduct/edit',{
+            id: result.id,
+            name: result.name,
+            desc: result.desc
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
+              $scope.getAllData(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
+
   $scope.addSubject = function(ev){
     ModalService.showModal({
       templateUrl: "./modals/addSubject.html",
