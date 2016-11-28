@@ -6,7 +6,6 @@ app.controller('ProductController',['$scope','$http','dataTrans','$window',funct
   $scope.data;
 
   $scope.getproduct = function(){
-    console.log($window.sessionStorage.data)
   	$http.get('/product/getAllProduct',{})
   	.then(function successGet(response){
   		$scope.productList = response.data;

@@ -23,6 +23,9 @@ module.exports = {
 	fd: {
 		type: 'string'
 	},
+	url:{
+		type: 'string'
+	},
 	tags: {
 		type: 'string'
 	},

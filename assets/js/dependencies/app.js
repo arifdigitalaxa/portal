@@ -1,1 +1,1 @@
-var app = angular.module("myApp", ['ngMaterial','ngCookies','angularModalService', 'ngAnimate', 'ui.router','ngSanitize','ngFileUpload','ngFileSaver','ngTagsInput'])
+var app = angular.module("myApp", ['ngMaterial','ngCookies','angularModalService', 'ngAnimate', 'ui.router','ngSanitize','ngFileUpload','ngFileSaver','ngTagsInput','ngclipboard'])

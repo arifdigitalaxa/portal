@@ -118,14 +118,15 @@ module.exports = {
 		    if (uploadedFiles.length === 0){
 		      return res.json('No file was uploaded');
 		    }
-	    	
-	    	console.log(uploadedFiles[0])
+	    	var fileurl = '/fileuploads/'+subID+'/'+uploadedFiles[0].fd.replace(/^.*[\\\/]/, '')
 
+	    	console.log('url: '+fileurl)
 	    	Files.create({
 	    		name: uploadedFiles[0].filename,
 	    		type: uploadedFiles[0].type,
 	    		size: uploadedFiles[0].size,
 	    		fd: uploadedFiles[0].fd,
+	    		url: fileurl,
 	    		desc: desc,
 	    		tags: tags,
 	    		subproduct: subID
