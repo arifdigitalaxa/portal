@@ -56,24 +56,18 @@
           <div role="tabpanel" class="tab-pane" id="document">
             <br>
             <br>
-            <div class="row col-md-8 col-md-offset-2 text-left">
-                  <br/>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control"  ng-model="docKey.desc" placeholder="Search documents">
-                        <span class="input-group-btn">
-                          <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </span>
-                      </div>
-                      <div class="col-md-6">
-                        <select class="form-control" id="subject" ng-model="subject" ng-options="subject.id as subject.name for subject in subjectList" ng-change="getQuestion(subject)">
-                          <option value="">Please choose a subject....</option>
-                      </select>
-                      </div>
-                    </div>
-                  </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control"  ng-model="docKey.desc" placeholder="Search documents">
             </div>
+            <div class="col-md-2">
+                
+            </div>
+            <div class="col-md-2">
+              <select class="form-control" id="subject" ng-model="selectedTag" ng-options="tags as tags for tags in tags" ng-change="getDoc(selectedTag)">
+                              <option value="">Tags</option>
+                          </select>
+            </div>
+            <br>
             <br>
             <br>
             <table class="table table-striped custab">

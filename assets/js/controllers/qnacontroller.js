@@ -9,6 +9,7 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window','FileSave
   var converter = new showdown.Converter()
 
   $scope.data;
+  $scope.tags  = ['All']
 
   $scope.getsubproduct = function(){
   	$scope.data = dataTrans.getData();
@@ -36,18 +37,54 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window','FileSave
           
           $scope.subproduct = response.data.subproduct
           $scope.subjectList = response.data.subject
-
           $http.post('/admin/getFileList',{
+            id: $window.sessionStorage.subproductID
+          }).then(function getFile(file){
+            $scope.fileList = file.data
+            $scope.getAllTags()
+          }, function errFound(err){
+              console.log(err);
+          })
+      }, function errorGet(err){
+        console.log(err);
+      })
+  }
+
+  $scope.getAllTags = function(){
+
+    var fileArr = []
+
+    $scope.fileList.forEach(function (file){
+      fileArr = file.tags.split(",")
+
+        fileArr.forEach(function(tags){
+          if(fileArr.includes(tags)){
+            $scope.tags.push(tags)
+            console.log(fileArr.includes(tags))
+          }
+        })
+    })
+  }
+
+  $scope.getDoc = function(tag){
+    if(tag == null || tag == 'All'){
+      $http.post('/admin/getFileList',{
             id: $window.sessionStorage.subproductID
           }).then(function getFile(file){
             $scope.fileList = file.data
           }, function errFound(err){
               console.log(err);
           })
-
-      }, function errorGet(err){
-        console.log(err);
-      })
+    }else{
+      $http.post('/admin/getFileTags',{
+            id: $window.sessionStorage.subproductID
+          }).then(function getFile(file){
+            $scope.fileList = file.data
+          }, function errFound(err){
+              console.log(err);
+          })
+    }
+    
   }
 
   $scope.getQuestion = function(subject){
@@ -108,7 +145,6 @@ app.controller('qnaController',['$scope','$http','dataTrans','$window','FileSave
       console.log(err);
     })
   }
-
 }])
 .filter('highlight', function($sce) {
   return function(text, phrase) {

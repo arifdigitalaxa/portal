@@ -73,6 +73,20 @@ module.exports = {
 		})
 	},
 
+	edit: function(req,res){
+		Subject.update({
+			id: req.param('id')
+		},{
+			name: req.param('name'),
+			desc: req.param('desc')
+		}).exec(function(err,updated){
+			if(err){
+				return res.json(err)
+			}
+
+			res.json({message: 'Subject updated'})
+		})
+	},
 
 	delete: function(req,res){
 

@@ -59,7 +59,7 @@
               <tr class="bg-primary">
                 <th>SUBJECT</th>
                 <th>DESCRIPTION</th>
-                <!-- <th>Edit</th>--> 
+                 <th class="text-center">EDIT</th> 
                 <th class="text-center">DELETE</th>
               </tr>
             </thead>
@@ -67,7 +67,7 @@
               <tr ng-repeat="subject in subjectList track by subject.id">
                   <th>{{subject.name}}</th>
                   <th>{{subject.desc}}</th>
-                  <!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+                  <th class="text-center"><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click="editSubject(ev,subject)"></i></th>
                   <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteSubject(ev,subject)"></i></th>
               </tr>
             </tbody>
@@ -101,7 +101,7 @@
               <tr class="bg-primary">
                 <th>ANSWER</th>
                 <th>DESCRIPTION</th>
-                <!-- <th>Edit</th> -->
+                <th class="text-center">EDIT</th>
                 <th class="text-center">DELETE</th>
               </tr>
             </thead>
@@ -109,7 +109,7 @@
               <tr ng-repeat="answer in answerList track by answer.id">
                 <th>{{answer.name}}</th>
                 <th><p ng-bind-html="returnHtml(answer.desc)"></p></th>
-                <!-- <th><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click=""></i></th> -->
+                <th class="text-center"><i class="fa fa-pencil-square-o text-primary fa-lg" aria-hidden="true" ng-click="editAnswer(ev,answer)"></i></th>
                 <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteAnswer(ev,answer)"></i></th>
               </tr>
             </tbody>
@@ -136,7 +136,7 @@
                 <th>{{file.tags}}</th>
                 <th class="text-center"><i class="fa fa-eye text-success fa-lg" aria-hidden="true" ng-click="viewDocument(file)"></i></th>
                 <th class="text-center"><i class="fa fa-download text-primary fa-lg" aria-hidden="true" ng-click="downloadDocument(file)"></i></th>
-                <th class="text-center"><i class="fa fa-clipboard text-primary fa-lg" aria-hidden="true"  ngclipboard data-clipboard-text="{{file.url}}" ng-click=""></i></th>
+                <th class="text-center"><i class="fa fa-clipboard text-primary fa-lg" aria-hidden="true"  ngclipboard data-clipboard-text="{{file.url}}"  data-toggle="tooltip" data-placement="top" title="Copy File URL" ng-click=""></i></th>
                 <th class="text-center"><i class="fa fa-trash text-danger fa-lg" aria-hidden="true" ng-click="deleteDocument(ev,file)"></i></th>
               </tr>
             </tbody>

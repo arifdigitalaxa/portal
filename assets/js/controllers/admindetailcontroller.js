@@ -171,6 +171,40 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
     });
   }
 
+  $scope.editSubject = function(ev,subject){
+    ModalService.showModal({
+      templateUrl: "./modals/editSubject.html",
+      controller: "editSubjectModalController",
+      inputs: {
+        title: "Edit Subject",
+        subproduct: $scope.subproduct,
+        subject: subject
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/subject/edit',{
+            id: result.id,
+            name: result.name,
+            desc: result.desc
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
+              $scope.getAllData(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
+    });
+  }
+
   $scope.addQuestion = function(ev){
     ModalService.showModal({
       templateUrl: "./modals/addQuestion.html",
@@ -295,6 +329,41 @@ app.controller('AdminDetailController',['$scope','$http','$mdDialog','ModalServi
 
     }, function() {
       
+    });
+  }
+
+  $scope.editAnswer = function(ev,answer){
+    ModalService.showModal({
+      templateUrl: "./modals/editAnswer.html",
+      controller: "editAnswerModalController",
+      inputs: {
+        title: "Edit Answer",
+        question: $scope.questionList,
+        answer: answer
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if(result){
+          $http.post('/answer/edit',{
+            id: result.id,
+            name: result.name,
+            desc: result.desc,
+            question: result.question
+          })
+          .then(function success(response){
+              // console.log(response);
+
+              if(response == null){
+                return
+              }
+              alertStatus(ev,response.data.title,response.data.message);
+              $scope.getAllData(ev)
+          }, function error(err){
+              alertStatus(ev,"Error",err)
+          })
+        }
+      });
     });
   }
 

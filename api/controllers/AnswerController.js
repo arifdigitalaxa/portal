@@ -50,6 +50,22 @@ module.exports = {
 		})
 	},
 
+	edit: function(req,res){
+		Answer.update({
+			id: req.param('id')
+		},{
+			name: req.param('name'),
+			desc: req.param('desc'),
+			question: req.param('question')
+		}).exec(function(err,updated){
+			if(err){
+				return res.json(err)
+			}
+
+			res.json({message: 'Answer updated'})
+		})
+	},
+
 	getAnswer: function(req,res){
 		Question.findOne({
 			id: req.param('id')
