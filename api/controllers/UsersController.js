@@ -98,9 +98,10 @@ module.exports = {
 
 	    // Look up the user record from the database which is
 	    // referenced by the id in the user session (req.session.me)
-	    Users.findOne(req.session.me, function foundUser(err, user) {
+	    Users.findOne({
+	    	username: req.session.me.username
+	    }, function foundUser(err, user) {
 	      if (err) return res.negotiate(err);
-
 	      // If session refers to a user who no longer exists, still allow logout.
 	      if (!user) {
 	        sails.log.verbose('Session refers to a user who no longer exists.');
@@ -143,6 +144,7 @@ module.exports = {
 		if(req.session.me){
 			res.json(req.session.me)
 		}else{
+			res.json(null);
 			console.log("No Session")
 		}
 	}

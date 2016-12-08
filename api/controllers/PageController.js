@@ -13,7 +13,9 @@ module.exports = {
 	      return res.view('login');
 	    }
 
-	    Users.findOne(req.session.me, function(err,user){
+	    Users.findOne({
+	    	username: req.session.me.username
+	    }, function(err,user){
 	    	if (err) {
        			return res.negotiate(err);
       		}
