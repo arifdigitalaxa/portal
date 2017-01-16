@@ -14,8 +14,6 @@ module.exports = {
 		var questions;
 		var subjects;
 
-		console.log(req.param('id'))
-
 		Question.find({
 				subject: req.param('id')
 			})
@@ -27,7 +25,6 @@ module.exports = {
 					return res.json(err)
 				}
 				async.each(questionList, function(question,callback){
-					//console.log(question)
 
 					Answer.find({
 						question: question.id
@@ -37,14 +34,12 @@ module.exports = {
 							return res.json(err)
 						}
 						question['answer'] = answer
-						//console.log(question);
 						data.push(question)
 
 						callback();
 
 					})
 				}, function(err){
-					console.log(data)
 					res.json({
 						question: data
 					})
@@ -104,9 +99,6 @@ module.exports = {
 		var answers;
 		var questions;
 		var subjects;
-
-		console.log(req.param('id'))
-		console.log(req.param('keyword'))
 		
 
 		Question.find({
@@ -121,7 +113,6 @@ module.exports = {
 					return res.json(err)
 				}
 				async.each(questionList, function(question,callback){
-					//console.log(question)
 
 					Answer.find({
 						question: question.id
@@ -131,14 +122,12 @@ module.exports = {
 							return res.json(err)
 						}
 						question['answer'] = answer
-						//console.log(question);
 						data.push(question)
 
 						callback();
 
 					})
 				}, function(err){
-					console.log(data)
 					res.json({
 						question: data
 					})

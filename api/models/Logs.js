@@ -8,7 +8,18 @@
 module.exports = {
 
   attributes: {
-
+  	user: {
+      type: 'integer'
+    },
+    action: {
+      type: 'string'
+    },
+    model: {
+      type: 'string'
+    },
+    dataId: {
+      type: 'integer'
+    }
   }
 };
 

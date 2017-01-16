@@ -12,7 +12,7 @@ module.exports = {
       type: 'string'
     },
     desc: {
-      type: 'string'
+      type: 'longtext'
     },
 
     question: {

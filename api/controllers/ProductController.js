@@ -12,10 +12,8 @@ module.exports = {
 		Product.find({
 			name: req.param('name')
 		}, function(err,productData){
-			console.log(productData);
 
 			if(productData === null){
-				console.log("1");
 				return res.json({title: "Error", message: "product "+req.param('name')+" already created!"})
 
 				//res.json({title: "Error", message: "product already created!"})
@@ -66,14 +64,12 @@ module.exports = {
 	delete: function(req,res){
 
 		
-		console.log(req.param('name'))
 		Product.find({
 			name: req.param('name')
 		}, function(err,product){
 			if(err){
 				 return res.json(err)
 			}
-			console.log(product)
 			Product.destroy({
 				name: product.name
 			}).exec(function (err){

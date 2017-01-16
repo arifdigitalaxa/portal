@@ -120,7 +120,6 @@ module.exports = {
 		    }
 	    	var fileurl = '/fileuploads/'+subID+'/'+uploadedFiles[0].fd.replace(/^.*[\\\/]/, '')
 
-	    	console.log('url: '+fileurl)
 	    	Files.create({
 	    		name: uploadedFiles[0].filename,
 	    		type: uploadedFiles[0].type,

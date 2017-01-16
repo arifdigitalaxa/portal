@@ -12,7 +12,6 @@ module.exports = {
 		Files.findOne({
 			id: req.param('id')
 		}).exec(function(err,file){
-			console.log(file)
 			fs.unlink(file.fd, function(err) {
 			   if (err) {
 			      return res.json(err);

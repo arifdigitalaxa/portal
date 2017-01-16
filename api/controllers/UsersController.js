@@ -14,10 +14,8 @@ module.exports = {
 		Users.find({
 			username: req.param('username')
 		}, function(err,userData){
-			console.log(userData);
 
 			if(userData === null){
-				console.log("1");
 				return res.json({title: "Error", message: "User "+req.param('username')+" already created!"})
 
 				//res.json({title: "Error", message: "User already created!"})
@@ -62,7 +60,6 @@ module.exports = {
 	login: function(req,res){
 		var Passwords = require('machinepack-passwords');
 
-		console.log(req.param('username'));
 		Users.findOne({
 			username: req.param('username')
 		}, function(err,userData){
@@ -70,7 +67,6 @@ module.exports = {
 				res.json(err)
 			}
 			if (typeof userData === "undefined") {
-   				 console.log("no username created under "+req.param('username'));
    				 res.json({result: "no username created under "+req.param('username')})
 			}else{
 					Passwords.checkPassword({
@@ -120,14 +116,12 @@ module.exports = {
 	delete: function(req,res){
 
 		
-		console.log(req.param('username'))
 		Users.find({
 			username: req.param('username')
 		}, function(err,user){
 			if(err){
 				 return res.json(err)
 			}
-			console.log(user)
 			Users.destroy({
 				username: user.username
 			}).exec(function (err){

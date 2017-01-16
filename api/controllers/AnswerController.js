@@ -92,8 +92,6 @@ module.exports = {
 
 	delete: function(req,res){
 
-		
-		console.log(req.param('name'))
 		Question.find({
 			name: req.param('name')
 		}, function(err,question){
